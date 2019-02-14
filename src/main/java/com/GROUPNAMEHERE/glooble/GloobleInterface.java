@@ -14,27 +14,45 @@ import java.awt.event.*;
 
 public class GloobleInterface extends Frame
 {   
-    private Frame SearchWindow; 
+    private Frame SearchWindow;
+    public String SearchInput;
 
     public GloobleInterface()
     {
         createSearchWindow();
         createMenuBar();
+        createwindowItems();
     }
 
     //creating the user interface window with closable button here
     public void createSearchWindow()
     {
+        
         SearchWindow = new Frame ("Glooble Search");
         SearchWindow.setVisible(true);
         SearchWindow.setSize(600,600);
+        SearchWindow.setBackground(Color.darkGray);
         SearchWindow.addWindowListener(new WindowAdapter()
         {
             public void windowClosing(WindowEvent e)
             {
                 System.exit(0);
             }
-        });
+        });    
+    }
+    
+    //editing window to include text and search bar
+    public void createwindowItems()
+    {
+      setLayout(new GridLayout(3,1));
+      
+      Label GloobleLabel;
+      GloobleLabel = new Label("Glooble Search", Label.CENTER);
+      GloobleLabel.setBackground(Color.darkGray);
+      GloobleLabel.setForeground(Color.blue);
+      GloobleLabel.setFont(new Font("ComicSansMS", Font.BOLD,20));
+      SearchWindow.add(GloobleLabel);
+      
     }
 
     //creating menu bar with file and settings menus
