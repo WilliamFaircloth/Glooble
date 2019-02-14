@@ -30,6 +30,54 @@ public class AdminUI extends Frame
         AdminWindow.setSize(600,600);
         AdminWindow.setBackground(Color.darkGray);
         AdminWindow.getContentPane().add(AdminButtons());
+        AdminWindow.setJMenuBar(createMenuBar());
+    }
+    
+    public JMenuBar createMenuBar()
+    {
+        JMenuBar GloobleAdminBar;
+        JMenu menu, submenu;
+        JMenuItem menuSelect;
+        
+        GloobleAdminBar = new JMenuBar();
+        
+        menu = new JMenu("File");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menu.getAccessibleContext().setAccessibleDescription(
+        "File");
+        GloobleAdminBar.add(menu);
+        
+        menuSelect = new JMenuItem("Open      Ctrl+O",KeyEvent.VK_T);
+        menu.add(menuSelect);
+        menuSelect = new JMenuItem("Close",KeyEvent.VK_T);
+        menu.add(menuSelect);
+        menuSelect = new JMenuItem("Save      Ctrl+S",KeyEvent.VK_T);
+        menu.add(menuSelect);
+        menuSelect = new JMenuItem("SaveAs...",KeyEvent.VK_T);
+        menu.add(menuSelect);
+        menu.addSeparator();
+        menuSelect = new JMenuItem("Exit",KeyEvent.VK_T);
+        menu.add(menuSelect);
+
+        menu = new JMenu("Settings");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menu.getAccessibleContext().setAccessibleDescription(
+        "Settings");
+        GloobleAdminBar.add(menu);
+        
+        menuSelect = new JMenuItem("General Settings",KeyEvent.VK_T);
+        menu.add(menuSelect);
+        
+        menu.add(menuSelect);
+        menu = new JMenu("About");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menu.getAccessibleContext().setAccessibleDescription(
+        "About");
+        GloobleAdminBar.add(menu);
+        menuSelect = new JMenuItem("Glooble Git",KeyEvent.VK_T);
+        menu.add(menuSelect);
+        
+        return GloobleAdminBar;
     }
     
     public JPanel AdminButtons()
