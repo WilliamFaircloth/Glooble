@@ -7,7 +7,7 @@ package com.GROUPNAMEHERE.glooble;
 
 /**
  *
- * @author William
+ * @author William, Cody, Reid
  */
 import java.awt.*;
 import java.awt.event.*;
@@ -18,6 +18,7 @@ public class GloobleInterface extends Frame
     private Frame SearchWindow;
     private Frame AdminWindow;
     public String SearchInput;
+    public String GloobleGit = "https://github.com/WilliamFaircloth/Glooble";
 
     public GloobleInterface()
     {
@@ -64,7 +65,7 @@ public class GloobleInterface extends Frame
     //editing window to include text and search bar
     public void createwindowItems()
     {
-      
+      //search page label and search bar go here
     }
 
     //here I primarily wanted to make the menu and a clickable link to the admin UI
@@ -130,6 +131,9 @@ public class GloobleInterface extends Frame
         menu.getAccessibleContext().setAccessibleDescription(
         "About");
         GloobleBar.add(menu);
+        
+        menuSelect = new JMenuItem("Glooble Git",KeyEvent.VK_T);
+        menu.add(menuSelect);
         
         return GloobleBar;
     }
