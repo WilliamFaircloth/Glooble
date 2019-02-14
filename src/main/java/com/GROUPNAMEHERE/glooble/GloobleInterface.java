@@ -9,6 +9,8 @@ package com.GROUPNAMEHERE.glooble;
  *
  * @author William, Cody, Reid
  */
+
+import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*; 
@@ -18,13 +20,11 @@ public class GloobleInterface extends Frame
     private Frame SearchWindow;
     private Frame AdminWindow;
     public String SearchInput;
-    public String GloobleGit = "https://github.com/WilliamFaircloth/Glooble";
-
+    
     public GloobleInterface()
     {
         createSearchWindow();
         createMenuBar();
-        createwindowItems();
     }
 
     //creating the user interface window with closable button here
@@ -42,30 +42,32 @@ public class GloobleInterface extends Frame
                 System.exit(0);
             }
         });  
-        
         SearchWindow.setJMenuBar(createMenuBar());
     }
     
     public void createAdminWindow()
     {
         JFrame AdminWindow = new JFrame ("Glooble Admin");
-        AdminWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        AdminWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         AdminWindow.setVisible(true);
         AdminWindow.setSize(600,600);
         AdminWindow.setBackground(Color.darkGray);
-        AdminWindow.addWindowListener(new WindowAdapter()
-        {
-            public void windowClosing(WindowEvent e)
-            {
-                System.exit(0);
-            }
-        }); 
+        AdminWindow.getContentPane().add(AdminButtons());
     }
     
-    //editing window to include text and search bar
-    public void createwindowItems()
+    public JPanel AdminButtons()
     {
-      //search page label and search bar go here
+      JPanel buttonPanel;
+      JButton AddButton, RemoveButton;
+      AddButton = new JButton("Add a File");
+      //listener here
+      RemoveButton = new JButton("Remove File");
+      //listener here
+      buttonPanel = new JPanel();
+      buttonPanel.add(AddButton);
+      buttonPanel.add(RemoveButton);
+      add(buttonPanel, BorderLayout.PAGE_START);
+      return buttonPanel;
     }
 
     //here I primarily wanted to make the menu and a clickable link to the admin UI
@@ -85,21 +87,16 @@ public class GloobleInterface extends Frame
         
         menuSelect = new JMenuItem("Open      Ctrl+O",KeyEvent.VK_T);
         menu.add(menuSelect);
-        
         menuSelect = new JMenuItem("Close",KeyEvent.VK_T);
         menu.add(menuSelect);
-        
         menuSelect = new JMenuItem("Save      Ctrl+S",KeyEvent.VK_T);
         menu.add(menuSelect);
-        
         menuSelect = new JMenuItem("SaveAs...",KeyEvent.VK_T);
         menu.add(menuSelect);
-        
         menu.addSeparator();
-        
         menuSelect = new JMenuItem("Exit",KeyEvent.VK_T);
         menu.add(menuSelect);
-        
+
         menu = new JMenu("Settings");
         menu.setMnemonic(KeyEvent.VK_A);
         menu.getAccessibleContext().setAccessibleDescription(
@@ -123,7 +120,6 @@ public class GloobleInterface extends Frame
               createAdminWindow();   
             }
         });
-       
         menu.add(menuSelect);
         
         menu = new JMenu("About");
