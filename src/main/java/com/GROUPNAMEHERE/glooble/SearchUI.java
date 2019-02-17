@@ -37,6 +37,7 @@ public class SearchUI extends Frame
             }
         });  
         SearchWindow.setJMenuBar(createMenuBar());
+        SearchWindow.getContentPane().add(SearchBar());
     }
     
     public JMenuBar createMenuBar()
@@ -96,7 +97,21 @@ public class SearchUI extends Frame
         GloobleBar.add(menu);
         menuSelect = new JMenuItem("Glooble Git",KeyEvent.VK_T);
         menu.add(menuSelect);
-        
+                
         return GloobleBar;
-    } 
+    }
+    
+    //Attempt at creating goofy ass searchbar
+    public JPanel SearchBar()
+    {
+        JPanel S1;
+        JTextField searchBar = new JTextField(20);
+        S1 = new JPanel();
+                
+        S1.add(searchBar);
+        add(S1, BorderLayout.CENTER);
+        return S1;
+        
+    
+    }
 }
