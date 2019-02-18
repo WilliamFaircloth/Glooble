@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -74,7 +74,31 @@ public class AdminUI extends Frame
         menu.getAccessibleContext().setAccessibleDescription(
         "About");
         GloobleAdminBar.add(menu);
+        menuSelect = new JMenuItem("About Glooble", KeyEvent.VK_T);
+        menuSelect.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                AboutUI obj = new AboutUI();
+            }
+        });
+        menu.add(menuSelect);
         menuSelect = new JMenuItem("Glooble Git",KeyEvent.VK_T);
+        menuSelect.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    String url = "https://github.com/WilliamFaircloth/Glooble";
+                    Desktop.getDesktop().browse(java.net.URI.create(url));
+                }
+                catch (java.io.IOException g)
+                {
+                    System.out.println(g.getMessage());
+                }
+            }
+        });
         menu.add(menuSelect);
         
         return GloobleAdminBar;

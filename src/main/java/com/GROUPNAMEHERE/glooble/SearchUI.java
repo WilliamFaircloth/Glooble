@@ -94,7 +94,31 @@ public class SearchUI extends Frame
         menu.getAccessibleContext().setAccessibleDescription(
         "About");
         GloobleBar.add(menu);
+        menuSelect = new JMenuItem("About Glooble", KeyEvent.VK_T);
+        menuSelect.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                AboutUI obj = new AboutUI();
+            }
+        });
+        menu.add(menuSelect);
         menuSelect = new JMenuItem("Glooble Git",KeyEvent.VK_T);
+        menuSelect.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                try 
+                {
+                    String url = "https://github.com/WilliamFaircloth/Glooble";
+                    Desktop.getDesktop().browse(java.net.URI.create(url));
+                }
+                catch (java.io.IOException g) 
+                {
+                    System.out.println(g.getMessage());
+                }
+            }
+        });
         menu.add(menuSelect);
         
         return GloobleBar;

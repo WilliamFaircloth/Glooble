@@ -19,6 +19,7 @@ public class GloobleInterface extends Frame
 {   
     private Frame SearchWindow;
     private Frame AdminWindow;
+    private Frame AboutWindow;
     
     public GloobleInterface()
     {
