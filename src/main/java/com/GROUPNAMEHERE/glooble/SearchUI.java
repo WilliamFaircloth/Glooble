@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class SearchUI extends Frame
+public class SearchUI extends JFrame
 {
     public SearchUI ()
     {
@@ -26,8 +26,11 @@ public class SearchUI extends Frame
     {
         JFrame SearchWindow = new JFrame ("Glooble Search");
         SearchWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        SearchWindow.setContentPane(SearchBar());
+        getContentPane().add(SearchBar(), BorderLayout.CENTER);
+        SearchWindow.setJMenuBar(createMenuBar());
         SearchWindow.setVisible(true);
-        SearchWindow.setSize(600,600);
+        SearchWindow.setSize(800,800);
         SearchWindow.setBackground(Color.darkGray);
         SearchWindow.addWindowListener(new WindowAdapter()
         {
@@ -36,17 +39,16 @@ public class SearchUI extends Frame
                 System.exit(0);
             }
         });  
-        SearchWindow.setJMenuBar(createMenuBar());
-        SearchWindow.getContentPane().add(SearchBar());
     }
     
     public JMenuBar createMenuBar()
     {
         JMenuBar GloobleBar;
-        JMenu menu, submenu;
+        JMenu menu;
         JMenuItem menuSelect;
         
         GloobleBar = new JMenuBar();
+        
         
         menu = new JMenu("File");
         menu.setMnemonic(KeyEvent.VK_A);
@@ -132,19 +134,48 @@ public class SearchUI extends Frame
         return GloobleBar;
     }
     
-    //Attempt at creating goofy ass searchbar
     public JPanel SearchBar()
     {
-        JPanel S1;
-        JTextField searchBar = new JTextField(20);
-        JButton searchButton = new JButton("Search");
-        S1 = new JPanel();
-                
-        S1.add(searchBar);
-        S1.add(searchButton);
-        add(S1, BorderLayout.CENTER);
-        return S1;
+        JPanel SearchPanel;
+        JButton SearchButton;
+        JTextField SearchBar;
+        JCheckBox AllTerms, AnyTerms, Exact;
         
-    
+        SearchPanel = new JPanel();
+        GroupLayout Searchlayout = new GroupLayout(SearchPanel);
+        Searchlayout.setAutoCreateGaps(true);
+        Searchlayout.setAutoCreateContainerGaps(true);
+        
+        SearchBar = new JTextField(30);
+        SearchButton = new JButton("Search");
+        AllTerms = new JCheckBox("Search All Terms");
+        AnyTerms = new JCheckBox("Search Any Terms");
+        Exact = new JCheckBox("Search Exact Match");
+        
+        Searchlayout.setHorizontalGroup(Searchlayout.createSequentialGroup()
+            
+            .addGroup(Searchlayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(SearchBar)
+                .addGroup(Searchlayout.createSequentialGroup()
+                    .addGroup(Searchlayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(AllTerms))
+                        .addComponent(AnyTerms)
+                        .addComponent(Exact)))
+            .addGroup(Searchlayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(SearchButton)) 
+        );        
+        
+        Searchlayout.setVerticalGroup(Searchlayout.createSequentialGroup()
+            .addGroup(Searchlayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+            .addComponent(SearchBar)
+            .addComponent(SearchButton))
+        .addGroup(Searchlayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+            .addComponent(AllTerms)
+            .addComponent(AnyTerms)
+            .addComponent(Exact)));
+        
+        SearchPanel.setLayout(Searchlayout);
+        return SearchPanel;
     }
+    
 }
