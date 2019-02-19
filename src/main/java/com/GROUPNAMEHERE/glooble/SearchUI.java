@@ -130,9 +130,11 @@ public class SearchUI extends Frame
     {
         JPanel S1;
         JTextField searchBar = new JTextField(20);
+        JButton searchButton = new JButton("Search");
         S1 = new JPanel();
                 
         S1.add(searchBar);
+        S1.add(searchButton);
         add(S1, BorderLayout.CENTER);
         return S1;
         
