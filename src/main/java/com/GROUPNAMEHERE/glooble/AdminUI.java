@@ -56,7 +56,6 @@ public class AdminUI extends Frame
         menu.add(menuSelect);
         menu.addSeparator();
         menuSelect = new JMenuItem("Exit",KeyEvent.VK_T);
-        
         menu.add(menuSelect);
 
         menu = new JMenu("Settings");
@@ -100,7 +99,6 @@ public class AdminUI extends Frame
             }
         });
         menu.add(menuSelect);
-        
         return GloobleAdminBar;
     }
     
