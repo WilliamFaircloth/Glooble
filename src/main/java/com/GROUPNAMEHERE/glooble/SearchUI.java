@@ -63,6 +63,13 @@ public class SearchUI extends Frame
         menu.add(menuSelect);
         menu.addSeparator();
         menuSelect = new JMenuItem("Exit",KeyEvent.VK_T);
+        menuSelect.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+              System.exit(0);   
+            }
+        });
         menu.add(menuSelect);
 
         menu = new JMenu("Settings");
