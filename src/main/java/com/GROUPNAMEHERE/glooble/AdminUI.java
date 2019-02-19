@@ -13,7 +13,8 @@ package com.GROUPNAMEHERE.glooble;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*; 
+import javax.swing.*;
+import java.util.Scanner;
 
 public class AdminUI extends Frame
 {
@@ -29,7 +30,7 @@ public class AdminUI extends Frame
         AdminWindow.setVisible(true);
         AdminWindow.setSize(800,800);
         AdminWindow.setBackground(Color.darkGray);
-        AdminWindow.getContentPane().add(AdminButtons());
+        AdminWindow.getContentPane().add(AdminPanel());
         AdminWindow.setJMenuBar(createMenuBar());
     }
     
@@ -102,18 +103,27 @@ public class AdminUI extends Frame
         return GloobleAdminBar;
     }
     
-    public JPanel AdminButtons()
+    public JPanel AdminPanel()
     {
-      JPanel buttonPanel;
+      JPanel AdminPanel;
       JButton AddButton, RemoveButton;
+      JTextArea FileLog;
+      JFileChooser FileChooser;
       AddButton = new JButton("Add a File");
-      //listener here
+      AddButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                FileIndexDialogue Add = new FileIndexDialogue();
+                Add.AddIndexDialogue(null);
+            }
+        });
       RemoveButton = new JButton("Remove File");
       //listener here
-      buttonPanel = new JPanel();
-      buttonPanel.add(AddButton);
-      buttonPanel.add(RemoveButton);
-      add(buttonPanel, BorderLayout.PAGE_START);
-      return buttonPanel;
+      AdminPanel = new JPanel();
+      AdminPanel.add(AddButton);
+      AdminPanel.add(RemoveButton);
+      add(AdminPanel, BorderLayout.PAGE_START);
+      return AdminPanel;
     }
 }
