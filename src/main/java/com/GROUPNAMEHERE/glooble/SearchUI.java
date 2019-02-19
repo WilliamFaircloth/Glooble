@@ -37,6 +37,7 @@ public class SearchUI extends Frame
             }
         });  
         SearchWindow.setJMenuBar(createMenuBar());
+        SearchWindow.getContentPane().add(SearchBar());
     }
     
     public JMenuBar createMenuBar()
@@ -101,9 +102,49 @@ public class SearchUI extends Frame
         menu.getAccessibleContext().setAccessibleDescription(
         "About");
         GloobleBar.add(menu);
-        menuSelect = new JMenuItem("Glooble Git",KeyEvent.VK_T);
+        menuSelect = new JMenuItem("About Glooble", KeyEvent.VK_T);
+        menuSelect.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                AboutUI obj = new AboutUI();
+            }
+        });
         menu.add(menuSelect);
-        
+        menuSelect = new JMenuItem("Glooble Git",KeyEvent.VK_T);
+        menuSelect.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                try 
+                {
+                    String url = "https://github.com/WilliamFaircloth/Glooble";
+                    Desktop.getDesktop().browse(java.net.URI.create(url));
+                }
+                catch (java.io.IOException g) 
+                {
+                    System.out.println(g.getMessage());
+                }
+            }
+        });
+        menu.add(menuSelect);
+                
         return GloobleBar;
-    } 
+    }
+    
+    //Attempt at creating goofy ass searchbar
+    public JPanel SearchBar()
+    {
+        JPanel S1;
+        JTextField searchBar = new JTextField(20);
+        JButton searchButton = new JButton("Search");
+        S1 = new JPanel();
+                
+        S1.add(searchBar);
+        S1.add(searchButton);
+        add(S1, BorderLayout.CENTER);
+        return S1;
+        
+    
+    }
 }

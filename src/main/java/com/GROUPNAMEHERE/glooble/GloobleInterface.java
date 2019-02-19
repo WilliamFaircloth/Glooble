@@ -7,7 +7,7 @@ package com.GROUPNAMEHERE.glooble;
 
 /**
  *
- * @author William, Cody, Reid
+ * @author William, Cody, Reid, Brandon
  */
 
 import java.io.*;
@@ -19,6 +19,7 @@ public class GloobleInterface extends Frame
 {   
     private Frame SearchWindow;
     private Frame AdminWindow;
+    private Frame AboutWindow;
     
     public GloobleInterface()
     {
