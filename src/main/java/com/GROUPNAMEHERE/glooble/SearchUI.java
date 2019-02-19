@@ -14,13 +14,17 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.Scanner;
 
 public class SearchUI extends JFrame
 {
+    
     public SearchUI ()
     {
        createSearchWindow(); 
     }
+    
+    
     
     public void createSearchWindow()
     {
@@ -170,7 +174,16 @@ public class SearchUI extends JFrame
             .addComponent(Exact))
         );
         SearchPanel.setLayout(Searchlayout);
+        
+        
+        //This is how SearchUI links to the Class GloobleSearch, not hooked up
+        SearchButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                String UserSearch = SearchBar.getText();
+            }
+        });
         return SearchPanel;
     }
-    
 }
