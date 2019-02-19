@@ -17,10 +17,13 @@ import javax.swing.*;
 
 public class AboutUI extends Frame 
 {
+     // About message, shows who program was created by, date, and copyright
     String aboutMessage = "Created by William Faircloth, Cody Mullins,\n"
         + "Brandon Henriksen, and Reid Wheeler.\n"
-        + "Tampa, Florida 2019" ;
+        + "Tampa, Florida 2019\n" 
+        + " © 2019";
     
+    // Creates About window
     public AboutUI ()
     {
         createAboutWindow();
