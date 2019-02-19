@@ -30,7 +30,7 @@ public class SearchUI extends JFrame
         getContentPane().add(SearchBar(), BorderLayout.CENTER);
         SearchWindow.setJMenuBar(createMenuBar());
         SearchWindow.setVisible(true);
-        SearchWindow.setSize(800,800);
+        SearchWindow.setSize(600,500);
         SearchWindow.setBackground(Color.darkGray);
         SearchWindow.addWindowListener(new WindowAdapter()
         {
@@ -46,9 +46,7 @@ public class SearchUI extends JFrame
         JMenuBar GloobleBar;
         JMenu menu;
         JMenuItem menuSelect;
-        
         GloobleBar = new JMenuBar();
-        
         
         menu = new JMenu("File");
         menu.setMnemonic(KeyEvent.VK_A);
@@ -129,8 +127,7 @@ public class SearchUI extends JFrame
                 }
             }
         });
-        menu.add(menuSelect);
-                
+        menu.add(menuSelect);  
         return GloobleBar;
     }
     
@@ -153,7 +150,6 @@ public class SearchUI extends JFrame
         Exact = new JCheckBox("Search Exact Match");
         
         Searchlayout.setHorizontalGroup(Searchlayout.createSequentialGroup()
-            
             .addGroup(Searchlayout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addComponent(SearchBar)
                 .addGroup(Searchlayout.createSequentialGroup()
@@ -163,8 +159,7 @@ public class SearchUI extends JFrame
                         .addComponent(Exact)))
             .addGroup(Searchlayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addComponent(SearchButton)) 
-        );        
-        
+        );
         Searchlayout.setVerticalGroup(Searchlayout.createSequentialGroup()
             .addGroup(Searchlayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
             .addComponent(SearchBar)
@@ -172,8 +167,8 @@ public class SearchUI extends JFrame
         .addGroup(Searchlayout.createParallelGroup(GroupLayout.Alignment.CENTER)
             .addComponent(AllTerms)
             .addComponent(AnyTerms)
-            .addComponent(Exact)));
-        
+            .addComponent(Exact))
+        );
         SearchPanel.setLayout(Searchlayout);
         return SearchPanel;
     }
