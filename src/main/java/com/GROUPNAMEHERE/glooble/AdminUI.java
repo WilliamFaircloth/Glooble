@@ -27,7 +27,7 @@ public class AdminUI extends Frame
         JFrame AdminWindow = new JFrame ("Glooble Admin");
         AdminWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         AdminWindow.setVisible(true);
-        AdminWindow.setSize(600,600);
+        AdminWindow.setSize(800,800);
         AdminWindow.setBackground(Color.darkGray);
         AdminWindow.getContentPane().add(AdminButtons());
         AdminWindow.setJMenuBar(createMenuBar());
@@ -36,9 +36,8 @@ public class AdminUI extends Frame
     public JMenuBar createMenuBar()
     {
         JMenuBar GloobleAdminBar;
-        JMenu menu, submenu;
+        JMenu menu;
         JMenuItem menuSelect;
-        
         GloobleAdminBar = new JMenuBar();
         
         menu = new JMenu("File");
@@ -57,6 +56,7 @@ public class AdminUI extends Frame
         menu.add(menuSelect);
         menu.addSeparator();
         menuSelect = new JMenuItem("Exit",KeyEvent.VK_T);
+        
         menu.add(menuSelect);
 
         menu = new JMenu("Settings");
