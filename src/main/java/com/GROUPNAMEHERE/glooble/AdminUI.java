@@ -28,7 +28,7 @@ public class AdminUI extends Frame
         JFrame AdminWindow = new JFrame ("Glooble Admin");
         AdminWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         AdminWindow.setVisible(true);
-        AdminWindow.setSize(800,800);
+        AdminWindow.setSize(350,350);
         AdminWindow.setBackground(Color.darkGray);
         AdminWindow.getContentPane().add(AdminPanel());
         AdminWindow.setJMenuBar(createMenuBar());
