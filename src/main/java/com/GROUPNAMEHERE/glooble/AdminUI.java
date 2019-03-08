@@ -15,7 +15,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.filechooser.*;
-import java.util.Scanner;
+import javax.swing.text.*;
+
 
 public class AdminUI extends Frame
 {
@@ -110,7 +111,10 @@ public class AdminUI extends Frame
       AdminPanel = new JPanel();
       JButton AddButton, RemoveButton;
       
-      
+      JTextArea FileArea = new JTextArea(20,20);
+      JScrollPane scrollPane = new JScrollPane(FileArea);
+      FileArea.setEditable(false);
+     
       AddButton = new JButton("Add File");
       AddButton.addActionListener(new ActionListener()
         {
@@ -120,13 +124,13 @@ public class AdminUI extends Frame
                 if(Interact.equals("Add File"))
                 {
                     JFileChooser AddChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-                    int Alpha = AddChooser.showSaveDialog(null);
                     AddChooser.setMultiSelectionEnabled(true);
-                    if (Alpha == JFileChooser.APPROVE_OPTION) 
+                    if (JFileChooser.APPROVE_OPTION == AddChooser.showOpenDialog(null)) 
                     { 
-                        File files[] = AddChooser.getSelectedFiles(); 
-                        int counter = 0; 
-                        // set text to blank 
+                        for (File file : AddChooser.getSelectedFiles())
+                        {
+                          FileArea.append(file.getName() + System.getProperty("line.separator"));  
+                        }  
                     }
                 }
                 else if(Interact.equals("Close"))
@@ -161,9 +165,6 @@ public class AdminUI extends Frame
                 }
             }
         });
-      
-      JTextArea FileArea = new JTextArea(20,20);
-      JScrollPane scrollPane = new JScrollPane(FileArea);
       
       AdminPanel.add(AddButton);
       AdminPanel.add(RemoveButton);
