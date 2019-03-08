@@ -17,6 +17,10 @@ import java.util.Scanner;
 
 public class FileHandler 
 {
+    String currentDir = System.getProperty("user.dir");
+    String defaultDirectory = currentDir + File.separatorChar + "Glooble Files";
+    File GloobleFileDirectory = new File(defaultDirectory);
+    
     public FileHandler ()
     {
        CreateHandler(); 
@@ -24,16 +28,11 @@ public class FileHandler
     
     public void CreateHandler()
     {
-        String currentDir = System.getProperty("user.dir");
-        String inputValue = JOptionPane.showInputDialog("Please input a directory to store files", currentDir);
-        
-        File GloobleFiles = new File(inputValue + File.separatorChar + "Glooble Files" );
-        if (!GloobleFiles.exists()) {
-            if (GloobleFiles.mkdir()) {
-                //put decision stuff here
-            } else {
-                //put decision stuff here 
-            }
+        if(!GloobleFileDirectory.exists())
+        {
+            defaultDirectory = JOptionPane.showInputDialog("Please input a directory to store files", currentDir);
+            GloobleFileDirectory.mkdir();
         }
     }
 }
+
