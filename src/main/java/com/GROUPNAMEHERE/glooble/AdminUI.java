@@ -14,6 +14,7 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.filechooser.*;
 import java.util.Scanner;
 
 public class AdminUI extends Frame
@@ -28,7 +29,7 @@ public class AdminUI extends Frame
         JFrame AdminWindow = new JFrame ("Glooble Admin");
         AdminWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         AdminWindow.setVisible(true);
-        AdminWindow.setSize(350,350);
+        AdminWindow.setSize(450,405);
         AdminWindow.setBackground(Color.darkGray);
         AdminWindow.getContentPane().add(AdminPanel());
         AdminWindow.setJMenuBar(createMenuBar());
@@ -106,24 +107,69 @@ public class AdminUI extends Frame
     public JPanel AdminPanel()
     {
       JPanel AdminPanel;
+      AdminPanel = new JPanel();
       JButton AddButton, RemoveButton;
-      JTextArea FileLog;
-      JFileChooser FileChooser;
-      AddButton = new JButton("Add a File");
+      
+      
+      AddButton = new JButton("Add File");
       AddButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                FileIndexDialogue Add = new FileIndexDialogue();
-                Add.AddIndexDialogue(null);
+                String Interact = e.getActionCommand();
+                if(Interact.equals("Add File"))
+                {
+                    JFileChooser AddChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                    int Alpha = AddChooser.showSaveDialog(null);
+                    AddChooser.setMultiSelectionEnabled(true);
+                    if (Alpha == JFileChooser.APPROVE_OPTION) 
+                    { 
+                        File files[] = AddChooser.getSelectedFiles(); 
+                        int counter = 0; 
+                        // set text to blank 
+                    }
+                }
+                else if(Interact.equals("Close"))
+                {
+                dispose();
+                }
             }
         });
+      
       RemoveButton = new JButton("Remove File");
-      //listener here
-      AdminPanel = new JPanel();
+      RemoveButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                String Interact = e.getActionCommand();
+                String userDirectory = System.getProperty("user.dir");
+                if(Interact.equals("Remove File"))
+                {
+                    JFileChooser RemoveChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                    int Alpha = RemoveChooser.showSaveDialog(null);
+                    RemoveChooser.setMultiSelectionEnabled(true);
+                    if (Alpha == JFileChooser.APPROVE_OPTION) 
+                    { 
+                        File files[] = RemoveChooser.getSelectedFiles(); 
+                        int counter = 0; 
+                        // set text to blank 
+                    }
+                }
+                else if(Interact.equals("Close"))
+                {
+                dispose();
+                }
+            }
+        });
+      
+      JTextArea FileArea = new JTextArea(20,20);
+      JScrollPane scrollPane = new JScrollPane(FileArea);
+      
       AdminPanel.add(AddButton);
       AdminPanel.add(RemoveButton);
-      add(AdminPanel, BorderLayout.PAGE_START);
+      AdminPanel.add(scrollPane);
+      add(AdminPanel);
       return AdminPanel;
     }
+    
 }

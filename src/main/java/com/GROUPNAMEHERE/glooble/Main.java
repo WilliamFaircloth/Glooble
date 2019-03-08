@@ -18,6 +18,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        SearchUI obj = new SearchUI();   
+        SearchUI obj = new SearchUI();
+        FileHandler handler = new FileHandler();
     }
 }

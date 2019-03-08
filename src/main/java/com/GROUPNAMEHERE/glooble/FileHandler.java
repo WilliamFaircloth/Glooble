@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.Scanner;
+import java.nio.file.*;
 
 public class FileHandler 
 {
@@ -24,6 +25,12 @@ public class FileHandler
     public FileHandler ()
     {
        CreateHandler(); 
+    }
+    
+    public File SendFile()
+    {
+        File SendFile = GloobleFileDirectory;
+        return SendFile;
     }
     
     public void CreateHandler()
