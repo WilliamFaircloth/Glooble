@@ -25,6 +25,8 @@ public class AdminUI extends Frame
        createAdminWindow(); 
     }
     
+    
+    
     public void createAdminWindow()
     {
         JFrame AdminWindow = new JFrame ("Glooble Admin");
@@ -127,6 +129,29 @@ public class AdminUI extends Frame
                     AddChooser.setMultiSelectionEnabled(true);
                     if (JFileChooser.APPROVE_OPTION == AddChooser.showOpenDialog(null)) 
                     { 
+                        File selectedFile = AddChooser.getSelectedFile();
+                        String filePath = selectedFile.getAbsolutePath();
+                        
+                        try
+                        {
+                        File source = new File(filePath);
+                        File destination = new File(FileHandler.defaultDirectory, selectedFile.getName());
+                        InputStream inStream = new FileInputStream(source);
+                        OutputStream outStream = new FileOutputStream(destination);
+                        byte[] streamBuffer = new byte[1024];
+                        int length;
+                            while ((length = inStream.read(streamBuffer)) > 0)
+                            {
+                               outStream.write(streamBuffer, 0, length);
+                            }
+                            if (inStream != null)inStream.close();
+                            if (outStream != null)outStream.close();
+                        }
+                        catch(IOException event)
+                        {
+                            event.printStackTrace();
+                        }
+                        
                         for (File file : AddChooser.getSelectedFiles())
                         {
                           FileArea.append(file.getName() + System.getProperty("line.separator"));  
