@@ -18,9 +18,9 @@ import java.nio.file.*;
 
 public class FileHandler 
 {
-    String currentDir = System.getProperty("user.dir");
-    String defaultDirectory = currentDir + File.separatorChar + "Glooble Files";
-    File GloobleFileDirectory = new File(defaultDirectory);
+    static String currentDir = System.getProperty("user.dir");
+    static String defaultDirectory = currentDir + File.separatorChar + "Glooble Files";
+    final File GloobleFileDirectory = new File(defaultDirectory);
     
     public FileHandler ()
     {
