@@ -16,6 +16,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.filechooser.*;
 import javax.swing.text.*;
+import java.util.*;
 
 
 public class AdminUI extends Frame
@@ -24,8 +25,6 @@ public class AdminUI extends Frame
     {
        createAdminWindow(); 
     }
-    
-    
     
     public void createAdminWindow()
     {
@@ -127,6 +126,8 @@ public class AdminUI extends Frame
                 {
                     JFileChooser AddChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
                     AddChooser.setMultiSelectionEnabled(true);
+                    AddChooser.setApproveButtonText("Add File");
+                    AddChooser.setApproveButtonToolTipText("Add selected file");
                     if (JFileChooser.APPROVE_OPTION == AddChooser.showOpenDialog(null)) 
                     { 
                         File selectedFile = AddChooser.getSelectedFile();
@@ -164,24 +165,36 @@ public class AdminUI extends Frame
                 }
             }
         });
-      
+
       RemoveButton = new JButton("Remove File");
       RemoveButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
                 String Interact = e.getActionCommand();
-                String userDirectory = System.getProperty("user.dir");
                 if(Interact.equals("Remove File"))
                 {
-                    JFileChooser RemoveChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-                    int Alpha = RemoveChooser.showSaveDialog(null);
+                    JFileChooser RemoveChooser = new JFileChooser(FileHandler.defaultDirectory);
                     RemoveChooser.setMultiSelectionEnabled(true);
-                    if (Alpha == JFileChooser.APPROVE_OPTION) 
+                    RemoveChooser.setApproveButtonText("Remove File");
+                    RemoveChooser.setApproveButtonToolTipText("Remove selected file");
+                    if (JFileChooser.APPROVE_OPTION == RemoveChooser.showOpenDialog(null)) 
                     { 
-                        File files[] = RemoveChooser.getSelectedFiles(); 
-                        int counter = 0; 
-                        // set text to blank 
+                        File selectedFile = RemoveChooser.getSelectedFile();
+                        selectedFile.delete();
+                        /**
+                         * The behavior of the text window still needs to be
+                         * corrected to reflect addition and removal of files
+                         * consider writing a method to read and auto update
+                         * the Jtextarea with names of files then just apply
+                         * when ever files are added or removed from directory
+                         * FileHandler.defaultDirectory
+                         */
+                        
+                        for (File file : RemoveChooser.getSelectedFiles())
+                        {
+                          /** Behavior here */
+                        }  
                     }
                 }
                 else if(Interact.equals("Close"))
@@ -197,5 +210,5 @@ public class AdminUI extends Frame
       add(AdminPanel);
       return AdminPanel;
     }
-    
 }
+    
