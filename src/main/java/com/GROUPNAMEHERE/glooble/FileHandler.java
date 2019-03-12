@@ -20,7 +20,7 @@ public class FileHandler
 {
     static String currentDir = System.getProperty("user.dir");
     static String defaultDirectory = currentDir + File.separatorChar + "Glooble Files";
-    final File GloobleFileDirectory = new File(defaultDirectory);
+    final File GloobleFileDirectory = new File(defaultDirectory + "/index");
     
     public FileHandler ()
     {
@@ -38,7 +38,7 @@ public class FileHandler
         if(!GloobleFileDirectory.exists())
         {
             defaultDirectory = JOptionPane.showInputDialog("Please input a directory to store files", currentDir);
-            GloobleFileDirectory.mkdir();
+            GloobleFileDirectory.mkdirs();
         }
     }
 }
