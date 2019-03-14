@@ -13,6 +13,10 @@ package com.GROUPNAMEHERE.glooble;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Paths;
 import javax.swing.*;
 import javax.swing.filechooser.*;
 import javax.swing.text.*;
@@ -106,18 +110,40 @@ public class AdminUI extends Frame
         return GloobleAdminBar;
     }
     
+        public void updateFileArea()
+    {
+        FileArea.setText(null);
+        
+        Path dir = Paths.get(FileHandler.defaultDirectory);
+        try (DirectoryStream<Path> updateStream = Files.newDirectoryStream(dir))
+        {
+            for (Path file: updateStream) 
+            {
+                FileArea.append(file.toString() + System.getProperty("line.separator"));
+            }
+        } catch (IOException x) {
+            System.err.println(x);
+        }
+    }
+    /**
+     * The JTextArea needed to be declared outside of the AdminPanel constructor
+     * in order for the updateFileArea method (above) to work. Attempts to nest 
+     * the updateFileArea method within the AdminPanel constructor caused several
+     * errors to appear elsewhere.
+     */
+    JTextArea FileArea;
     public JPanel AdminPanel()
     {
-      JPanel AdminPanel;
-      AdminPanel = new JPanel();
-      JButton AddButton, RemoveButton;
+        JPanel AdminPanel;
+        AdminPanel = new JPanel();
+        JButton AddButton, RemoveButton;
       
-      JTextArea FileArea = new JTextArea(20,20);
-      JScrollPane scrollPane = new JScrollPane(FileArea);
-      FileArea.setEditable(false);
-     
-      AddButton = new JButton("Add File");
-      AddButton.addActionListener(new ActionListener()
+        FileArea = new JTextArea(20,20);
+        JScrollPane scrollPane = new JScrollPane(FileArea);
+        FileArea.setEditable(false);
+          
+        AddButton = new JButton("Add File");
+        AddButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
@@ -166,8 +192,8 @@ public class AdminUI extends Frame
             }
         });
 
-      RemoveButton = new JButton("Remove File");
-      RemoveButton.addActionListener(new ActionListener()
+        RemoveButton = new JButton("Remove File");
+        RemoveButton.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
@@ -191,6 +217,8 @@ public class AdminUI extends Frame
                          * FileHandler.defaultDirectory
                          */
                         
+                        updateFileArea();
+                        
                         for (File file : RemoveChooser.getSelectedFiles())
                         {
                           /** Behavior here */
@@ -203,6 +231,8 @@ public class AdminUI extends Frame
                 }
             }
         });
+      
+      updateFileArea();
       
       AdminPanel.add(AddButton);
       AdminPanel.add(RemoveButton);
