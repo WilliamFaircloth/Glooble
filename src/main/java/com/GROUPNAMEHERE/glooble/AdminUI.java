@@ -110,16 +110,16 @@ public class AdminUI extends Frame
         return GloobleAdminBar;
     }
     
-        public void updateFileArea()
+    public void updateFileArea()
     {
         FileArea.setText(null);
         
         Path dir = Paths.get(FileHandler.defaultDirectory);
-        try (DirectoryStream<Path> updateStream = Files.newDirectoryStream(dir))
+        try (DirectoryStream<Path> updateStream = Files.newDirectoryStream(dir, "*.*"))
         {
             for (Path file: updateStream) 
             {
-                FileArea.append(file.toString() + System.getProperty("line.separator"));
+                FileArea.append(file.getFileName().toString() + System.getProperty("line.separator"));
             }
         } catch (IOException x) {
             System.err.println(x);
