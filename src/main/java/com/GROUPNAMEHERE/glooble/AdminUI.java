@@ -112,6 +112,7 @@ public class AdminUI extends Frame
     
     public void updateFileArea()
     {
+        FileHandler.updateFileInfo();
         FileArea.setText(null);
         
         Path dir = Paths.get(FileHandler.defaultDirectory);
@@ -182,7 +183,10 @@ public class AdminUI extends Frame
                         for (File file : AddChooser.getSelectedFiles())
                         {
                           FileArea.append(file.getName() + System.getProperty("line.separator"));  
-                        }  
+                        }
+                        
+                        updateFileArea();
+                        
                     }
                 }
                 else if(Interact.equals("Close"))
