@@ -8,12 +8,14 @@ package com.GROUPNAMEHERE.glooble;
 /**
  *
  * @author William
+ * @author Reid
  */
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.Scanner;
+import java.util.*;
 import java.nio.file.*;
 import java.util.Date;
 import java.io.File;
@@ -71,5 +73,38 @@ public class FileHandler
         }
         
     }
+    
+    Map<String, Set<IndexData<String,ArrayList>>> index = new TreeMap<>();
+    public static void createIndex() 
+    {
+    
+    }
+}
+
+/**
+ * A class to be used with the createIndex method.
+ * Each instance is intended to hold the name of a file and an ArrayList of
+ * the locations of a word in that file. 
+ * 
+ * The class is a modified version of the Tuple class seen within the
+ * NestedMap.java demo on wpollock.com/COP2805C.
+ * 
+ * @author Reid
+ * @param <T1>
+ * @param <T2> 
+ */
+class IndexData <T1, T2>
+{
+    public final T1 fileName;
+    public final T2 wordLoc;
+    
+    IndexData(T1 t, T2 s)
+    {
+        fileName = t;
+        wordLoc = s;
+    }
+    
+    public T1 getIndexedFileName() {return fileName;}
+    public T2 getIndexedWordLoc() {return wordLoc;}
 }
 
