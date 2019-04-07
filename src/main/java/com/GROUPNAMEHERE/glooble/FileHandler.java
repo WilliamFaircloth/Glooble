@@ -74,10 +74,57 @@ public class FileHandler
         
     }
     
-    Map<String, Set<IndexData<String,ArrayList>>> index = new TreeMap<>();
+    static Map<String, HashMap<String,ArrayList>> index = new TreeMap<>();
     public static void createIndex() 
     {
-    
+        Path dir = Paths.get(defaultDirectory);
+        try (DirectoryStream<Path> ds = Files.newDirectoryStream(dir, "*.*"))
+        {
+            for (Path file: ds)
+            {
+                int wordPos = 0;
+                String fileName = file.getFileName().toString();
+                Scanner scan = new Scanner(file);
+                while (scan.hasNext())
+                {
+                    String word = scan.next();
+                    word = word.toLowerCase();
+                    if (!index.containsKey(word))
+                    {
+                        HashMap<String, ArrayList> map = new HashMap<>();
+                        ArrayList<Integer> wordLoc = new ArrayList();
+                        wordLoc.add(wordPos);
+                        map.put(fileName, wordLoc);
+                        index.put(word, map);
+                        
+                    }
+                    else if (index.containsKey(word))
+                    try {
+                        HashMap<String, ArrayList> map = index.get(word);
+                        ArrayList<Integer> wordLoc /*= map.get(fileName)*/;
+                        if (map.containsKey(fileName))
+                        {
+                            wordLoc = map.get(fileName);
+                            wordLoc.add(wordPos);
+                            map.put(fileName, wordLoc);
+                        }
+                        else if (!map.containsKey(fileName))
+                        {
+                            wordLoc = new ArrayList();
+                            wordLoc.add(wordPos);
+                            map.put(fileName, wordLoc);
+                        }
+                        index.put(word, map);
+                    } catch (NullPointerException e) {
+                        System.err.println(e);
+                    }
+                    wordPos++;
+                }
+            }
+        } catch (IOException x) {
+            System.err.println(x);
+        }
+        System.out.println(index); //To test or check the result
     }
 }
 

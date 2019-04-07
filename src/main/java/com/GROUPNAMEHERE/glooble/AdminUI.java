@@ -239,6 +239,8 @@ public class AdminUI extends Frame
       
       updateFileArea();
       
+      FileHandler.createIndex();
+      
       AdminPanel.add(AddButton);
       AdminPanel.add(RemoveButton);
       AdminPanel.add(scrollPane);
